@@ -204,6 +204,7 @@ type SavedState = {
 const emptyState: SavedState = { completed: [], favourites: [], reflections: {}, dates: [] };
 const key = "daily-care-journal-v1";
 const todayKey = () => new Date().toLocaleDateString("en-CA");
+
 const dailyIndex = () => {
   const start = new Date(new Date().getFullYear(), 0, 0);
   const now = new Date();
@@ -303,6 +304,7 @@ export default function Home() {
             <p className="eyebrow">{exercise.category}練習</p>
             <h1>{exercise.title}</h1>
             <div className="marker" />
+
             <div className="actions">
               <button className="primary" onClick={() => setModal(true)}>
                 {isDone ? "再做一次" : "開始今日練習"}
@@ -311,29 +313,35 @@ export default function Home() {
                 ↻ 換一個練習
               </button>
             </div>
+
             <div className="streak-card">
-                <span>
-                  <strong>每日照顧簿簿</strong>
-                </span>
-              
+              <span>
+                <strong>每日照顧簿簿</strong>
+              </span>
+
               <div className="stamps" aria-label="最近七日完成紀錄">
-                  {Array.from({ length: 7 }).map((_, i) => (
-                    <i
-                      key={i}
-                      className={i < Math.min(streak, 7) ? "filled" : ""}
-                    >
-                      ✓
-                    </i>
-                  ))}
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <i
+                    key={i}
+                    className={i < Math.min(streak, 7) ? "filled" : ""}
+                  >
+                    ✓
+                  </i>
+                ))}
               </div>
             </div>
+          </div>
 
           <article className="paper-stack">
             <div className="kraft" />
             <div className="grid-paper" />
             <div className="exercise-paper">
               <span className="clip">⌇</span>
-              <button className={`heart ${isFavourite ? "saved" : ""}`} onClick={() => toggleFavourite(exercise.id)} aria-label="收藏練習">
+              <button
+                className={`heart ${isFavourite ? "saved" : ""}`}
+                onClick={() => toggleFavourite(exercise.id)}
+                aria-label="收藏練習"
+              >
                 {isFavourite ? "♥" : "♡"}
               </button>
               <div className="doodle-icon">✦</div>
@@ -352,18 +360,34 @@ export default function Home() {
             <h1>探索照顧自己的方法</h1>
             <p>揀一頁此刻最適合你的，無需要跟次序。</p>
           </div>
+
           <div className="toolbar">
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜尋練習…" aria-label="搜尋練習" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="搜尋練習…"
+              aria-label="搜尋練習"
+            />
             <div className="filters">
               {["全部", "身體", "覺察", "連結", "日常"].map((name) => (
-                <button key={name} className={filter === name ? "selected" : ""} onClick={() => setFilter(name)}>{name}</button>
+                <button
+                  key={name}
+                  className={filter === name ? "selected" : ""}
+                  onClick={() => setFilter(name)}
+                >
+                  {name}
+                </button>
               ))}
             </div>
           </div>
+
           <div className="exercise-grid">
             {filtered.map((item) => (
               <article key={item.id} className={data.completed.includes(item.id) ? "done" : ""}>
-                <div><span>DAY {String(item.id).padStart(3, "0")}</span><em>{item.category}</em></div>
+                <div>
+                  <span>DAY {String(item.id).padStart(3, "0")}</span>
+                  <em>{item.category}</em>
+                </div>
                 <h2>{item.title}</h2>
                 <button onClick={() => pick(item.id - 1)}>打開這一頁 →</button>
               </article>
@@ -379,17 +403,26 @@ export default function Home() {
             <h1>你留下的足跡</h1>
             <p>每一個小小的完成，都值得被看見。</p>
           </div>
+
           <div className="stats">
             <div><strong>{data.completed.length}</strong><span>完成練習</span></div>
             <div><strong>{streak}</strong><span>連續日數</span></div>
             <div><strong>{data.favourites.length}</strong><span>收藏練習</span></div>
           </div>
+
           <div className="journey-list">
             <h2>最近完成</h2>
             {data.completed.length ? data.completed.slice().reverse().map((id) => {
               const item = exercises[id - 1];
-              return <button key={id} onClick={() => pick(id - 1)}><span>✓ DAY {String(id).padStart(3, "0")}</span>{item.title}</button>;
-            }) : <p className="empty">完成第一個練習後，足跡就會在這裡出現。</p>}
+              return (
+                <button key={id} onClick={() => pick(id - 1)}>
+                  <span>✓ DAY {String(id).padStart(3, "0")}</span>
+                  {item.title}
+                </button>
+              );
+            }) : (
+              <p className="empty">完成第一個練習後，足跡就會在這裡出現。</p>
+            )}
           </div>
         </section>
       )}
@@ -405,7 +438,13 @@ export default function Home() {
             <textarea
               id="reflection"
               value={data.reflections[exercise.id] || ""}
-              onChange={(e) => setData((old) => ({ ...old, reflections: { ...old.reflections, [exercise.id]: e.target.value } }))}
+              onChange={(e) => setData((old) => ({
+                ...old,
+                reflections: {
+                  ...old.reflections,
+                  [exercise.id]: e.target.value,
+                },
+              }))}
               placeholder="寫下一句感受就可以…"
             />
             <button className="primary" onClick={completeToday}>✓ 完成今日練習</button>
