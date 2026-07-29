@@ -336,7 +336,7 @@ export default function Home() {
             <div className="kraft" />
             <div className="grid-paper" />
             <div className="exercise-paper">
-              <span className="clip">⌇</span>
+              <span className="clip" aria-hidden="true">📎</span>
               <button
                 className={`heart ${isFavourite ? "saved" : ""}`}
                 onClick={() => toggleFavourite(exercise.id)}
