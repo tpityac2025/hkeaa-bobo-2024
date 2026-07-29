@@ -312,12 +312,21 @@ export default function Home() {
               </button>
             </div>
             <div className="streak-card">
-              <span>連續照顧自己 <strong>{streak} 日</strong></span>
-              <div className="stamps" aria-label={`連續 ${streak} 日`}>
-                {Array.from({ length: 7 }).map((_, i) => <i key={i} className={i < Math.min(streak, 7) ? "filled" : ""}>✓</i>)}
+                <span>
+                  <strong>每日照顧簿簿</strong>
+                </span>
+              
+              <div className="stamps" aria-label="最近七日完成紀錄">
+                  {Array.from({ length: 7 }).map((_, i) => (
+                    <i
+                      key={i}
+                      className={i < Math.min(streak, 7) ? "filled" : ""}
+                    >
+                      ✓
+                    </i>
+                  ))}
               </div>
             </div>
-          </div>
 
           <article className="paper-stack">
             <div className="kraft" />
@@ -330,7 +339,6 @@ export default function Home() {
               <div className="doodle-icon">✦</div>
               <p className="paper-copy">{exercise.note}</p>
               <div className="paper-line" />
-              <small>PERSONAL SPACE · NO RIGHT ANSWER</small>
             </div>
             <span className="tape" />
           </article>
