@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { EXERCISE_NOTES } from "./exercise-notes";
 
 const RAW_EXERCISES = `5 個深呼吸
 閉上眼睛聆聽周圍的聲音
@@ -183,19 +184,10 @@ Follow 我們的 Instagram
 請一位信任的人寫三句欣賞你的話
 吃一點苦的東西`;
 
-const NOTES = [
-  "慢慢來就可以，今日的你已經做得很好。",
-  "你的感受才是主角，沒有標準答案。",
-  "留意當下的小事，也是在照顧自己。",
-  "休息不是偷懶，是為下一步補充能量。",
-  "你有屬於自己的色調，無需迎合別人的調色盤。",
-  "每一次把注意力帶回自己，都是溫柔的練習。",
-];
-
 const exercises = RAW_EXERCISES.split("\n").map((title, index) => ({
   id: index + 1,
   title,
-  note: NOTES[index % NOTES.length],
+  note: EXERCISE_NOTES[index] ?? "",
   category:
     /朋友|家人|身邊|陌生人|著緊/.test(title) ? "連結" :
     /寫|畫|記|形容|回憶|夢|焦慮/.test(title) ? "覺察" :
@@ -311,7 +303,6 @@ export default function Home() {
             <p className="eyebrow">{exercise.category}練習</p>
             <h1>{exercise.title}</h1>
             <div className="marker" />
-            <p className="lead">今日，留幾分鐘俾自己。</p>
             <div className="actions">
               <button className="primary" onClick={() => setModal(true)}>
                 {isDone ? "再做一次" : "開始今日練習"}
@@ -338,7 +329,6 @@ export default function Home() {
               </button>
               <div className="doodle-icon">✦</div>
               <p className="paper-copy">{exercise.note}</p>
-              <p className="hand-note">你的感受，先係今日嘅答案。</p>
               <div className="paper-line" />
               <small>PERSONAL SPACE · NO RIGHT ANSWER</small>
             </div>
