@@ -109,20 +109,8 @@ nav button.active::after {
   margin: 0;
   font-size: clamp(44px, 5.3vw, 76px);
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
   font-weight: 900;
-}
-
-.intro h1,
-.intro .lead,
-.intro .swap {
-  font-family: "Chenyuluoyan", "Noto Sans TC", "PingFang TC",
-    "Microsoft JhengHei", sans-serif;
-  font-weight: 400;
-}
-
-.intro h1 {
-  letter-spacing: 0.02em;
 }
 
 .intro .lead {
@@ -131,6 +119,9 @@ nav button.active::after {
 }
 
 .intro .swap {
+  font-family: "Chenyuluoyan", "Noto Sans TC", "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  font-weight: 400;
   font-size: 20px;
   letter-spacing: 0.05em;
 }
@@ -264,9 +255,12 @@ nav button.active::after {
 .paper-copy {
   max-width: 500px;
   margin: 0 auto;
-  font-size: clamp(21px, 2.2vw, 30px);
+  font-family: "Chenyuluoyan", "Noto Sans TC", "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.7;
-  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-weight: 400;
   text-align: center;
 }
 .paper-copy::after {
@@ -282,7 +276,12 @@ nav button.active::after {
 }
 .hand-note {
   margin: 50px 0 0;
-  font-size: 18px;
+  font-family: "Chenyuluoyan", "Noto Sans TC", "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  font-size: 22px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  font-weight: 400;
   transform: rotate(-2deg);
   text-align: right;
 }
